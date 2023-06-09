@@ -3,7 +3,8 @@ export default {
   data() {
     return (
       {
-        name: 'pankaj'
+        name: 'pankaj',
+        show:false
       }
     )
   },
@@ -30,6 +31,8 @@ export default {
   <div class="greetings">
     <p>{{ name }}</p>
     <p>{{ msg }}</p>
+    <p v-if="show">{{ show }}</p>
+
     <button v-on:click="hello">Click me</button>
     <input v-model="text" v-on:change="change"/>
   </div>
