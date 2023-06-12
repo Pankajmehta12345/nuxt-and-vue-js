@@ -3,8 +3,14 @@ export default {
   data() {
     return (
       {
-        name: 'pankaj',
-        show:false
+        name: '',
+        show: false,
+        fullName: "",
+        values:
+        {
+          email:'',
+          password:''
+        }
       }
     )
   },
@@ -15,26 +21,32 @@ export default {
   methods:
   {
     hello() {
-      console.log("hi pankaj");
+      this.name = 'pankaj';
+      this.show = !this.show;
+      this.values.email= this.email;
+      this.values.password=this.password;
+      console.log("data is: ", this.values)
     },
-    change(e)
-    {
-      console.log(e.target.value)
-    }
-
   }
-  
+
 };
 </script>
 
 <template>
+  <!-- <div v-bind:style="{backgroundColor:'red',height:'20px',width:'200px'}"></div> -->
   <div class="greetings">
     <p>{{ name }}</p>
     <p>{{ msg }}</p>
     <p v-if="show">{{ show }}</p>
 
     <button v-on:click="hello">Click me</button>
-    <input v-model="text" v-on:change="change"/>
+    <input v-model="fullName" />
+    {{ fullName }}
+    <p v-show="show">hi pankaj</p>
+    <input type="email" v-model="email"/>
+    <br />
+    <input type="password" v-model="password"/>
+    <br/>
   </div>
 </template>
 
@@ -47,6 +59,11 @@ h1 {
 
 h3 {
   font-size: 1.2rem;
+}
+
+.greetings {
+  color: red;
+  /* cursor:not-allowed; */
 }
 
 .greetings h1,
