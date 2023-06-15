@@ -22,13 +22,23 @@ export default {
         hi: 'pankaj',
         test: true,
         btnDisabled: true,
-        inputField: true
+        inputField: true,
+        signUp:
+        {
+          userName: '',
+          pass: ''
+        },
+        error:
+        {
+          userName: '',
+          pass: ''
+        }
       }
     )
   },
   props:
   {
-    msg: Number
+    msg: String
   },
   methods:
   {
@@ -38,16 +48,46 @@ export default {
       this.show = !this.show;
       this.values.email = this.email;
       this.values.password = this.password;
-      console.log("data is: ", this.values);
-      console.log(this.hi)
+      // console.log("data is: ", this.values);
+      // console.log(this.hi)
     },
+    updateValue() {
+      console.log("hi pankaj mehta")
+    },
+    signUpUser(e) {
+      console.log(this.signUp.userName.length);
+      e.preventDefault();
+      if (this.signUp.userName.length < 1) {
+        this.error.userName = true
+
+      }
+      if (this.signUp.pass.length < 1) {
+        this.error.pass = true
+      }
+      else{
+        this.error.pass = false;
+        this.error.userName = false;
+        console.log(this.signUp)
+      }
+    }
   }
 
 };
 </script>
 
 <template>
-  <TheWelcome/>
+  <input type="text" v-model="signUp.userName" />
+  <p> {{ error.userName ? "username is required":'' }}</p>
+  <br />
+  <input type="password" v-model="signUp.pass" />
+  <p>{{ error.pass ? "password is required":''}}</p>
+  <br />
+  <button @click="signUpUser">SignUp</button>
+  <br />
+  <br />
+  <br />
+  <!-- try -->
+  <TheWelcome @changeTitle="updateValue()" />
   <p v-once>{{ test }}</p>
   <p>{{ test }}</p>
   <!-- <div v-bind:style="{backgroundColor:'red',height:'20px',width:'200px'}"></div> -->
@@ -56,7 +96,8 @@ export default {
     <p>{{ msg }}</p>
     <p v-if="show">{{ show }}</p>
     <!-- <button v-bind:disabled='btnDisabled' v-on:click="hello">Click me</button> -->
-    <button v-on:click="hello">Click me</button>
+    <!-- <button v-on:click="hello">Click me</button> -->
+    <button @click="hello">Click me</button>
     <input v-model="fullName" />
     {{ fullName }}
     <p v-show="show">hi pankaj</p>
@@ -74,6 +115,7 @@ export default {
     <!-- <span>{{ msg }}</span> -->
     <p v-html="header"></p>
   </div>
+  <!--  -->
 </template>
 
 <style scoped>
@@ -81,5 +123,4 @@ export default {
   color: red;
   /* cursor:not-allowed; */
 }
-
 </style>
